@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Record {
 
-    //测试一下
+    //测试
     private UUID mId;
     private String mTitle;
     private Date mDate;
