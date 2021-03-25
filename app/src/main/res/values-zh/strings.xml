@@ -21,4 +21,5 @@
     <string name="record_report_contacts">联系人是 %s.</string>
     <string name="record_report_subject">记录处理情况报告</string>
     <string name="send_report">发送报告</string>
+    <string name="record_location">定位</string>
 </resources>

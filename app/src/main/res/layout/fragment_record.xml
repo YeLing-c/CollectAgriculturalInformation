@@ -71,6 +71,11 @@
         android:text="@string/record_solved_label" />
 
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/record_location"/>
+
+    <Button
         android:id="@+id/record_contacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
