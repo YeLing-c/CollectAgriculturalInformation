@@ -37,6 +37,7 @@ public class RecordListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //让Fragment知道RecordListFragment需接收选项菜单方法回调
         setHasOptionsMenu(true);
     }
 
@@ -50,6 +51,7 @@ public class RecordListFragment extends Fragment {
                 .findViewById(R.id.record_recycler_view);
         mRecordRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //保存实例
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
         }
@@ -68,12 +70,18 @@ public class RecordListFragment extends Fragment {
         updateUI();
     }
 
+    /**
+     * 利用实例保存机制，解决子标题旋转后消失的问题
+     */
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
     }
 
+    /**
+     * 实例化fragment_record_list中定义的菜单
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -87,6 +95,9 @@ public class RecordListFragment extends Fragment {
         }
     }
 
+    /**
+     * 响应菜单项的选择事件
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

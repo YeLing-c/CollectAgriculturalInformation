@@ -20,6 +20,7 @@ import java.util.GregorianCalendar;
 
 public class DatePickerFragment extends DialogFragment {
 
+    //将日期作为extra附加给Intent，回传到RecordFragment
     public static final String EXTRA_DATE =
             "com.myapp.android.collectagriculturalinformation.date";
 
@@ -27,6 +28,9 @@ public class DatePickerFragment extends DialogFragment {
 
     private DatePicker mDatePicker;
 
+    /**
+     * 创建和设置Fragment argument
+     */
     public static DatePickerFragment newInstance(Date date) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATE, date);
@@ -40,6 +44,7 @@ public class DatePickerFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Date date = (Date) getArguments().getSerializable(ARG_DATE);
 
+        //使用Calendar对象初始化DatePicker
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
@@ -74,6 +79,7 @@ public class DatePickerFragment extends DialogFragment {
             return;
         }
 
+        //创建intent并将日期作为extra附加到intent上
         Intent intent = new Intent();
         intent.putExtra(EXTRA_DATE, date);
 

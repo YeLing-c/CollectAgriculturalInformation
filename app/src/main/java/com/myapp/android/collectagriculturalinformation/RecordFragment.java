@@ -41,6 +41,7 @@ public class RecordFragment extends Fragment {
     private static final String ARG_RECORD_ID = "record_id";
     private static final String DIALOG_DATE = "DialogDate";
 
+    //请求代码常量，目标Fragment通过请求代码常量确认是哪个Fragment在回传数据。
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_CONTACT = 1;
     private static final int REQUEST_PHOTO = 2;
@@ -115,6 +116,7 @@ public class RecordFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment
                         .newInstance(mRecord.getDate());
+                //设置DatePickerFragment的目标Fragment为RecordFragment，请求代码常量REQUEST_DATE
                 dialog.setTargetFragment(RecordFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
             }

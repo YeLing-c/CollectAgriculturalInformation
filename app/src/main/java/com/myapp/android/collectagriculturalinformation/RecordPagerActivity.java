@@ -1,6 +1,6 @@
 package com.myapp.android.collectagriculturalinformation;
 /**
- * Description 创建并管理ViewPager以及托管DatePickerFragment
+ * Description 创建并管理ViewPager
  * 为UI添加ViewPager后，用户可左右滑动屏幕，切换查看不同列表项的明细页面
  */
 import android.content.Context;
