@@ -1,5 +1,8 @@
 package com.myapp.android.collectagriculturalinformation;
-
+/**
+ * Description 向用户展示record列表
+ *
+ */
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,7 +27,10 @@ public class RecordListFragment extends Fragment {
 
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
 
+    //创建充满屏幕的n个view。滑动屏幕切换视图时，上一个视图会被回收利用。
+    //RecyclerView需要显示视图时就去找它对应的Adapter。
     private RecyclerView mRecordRecyclerView;
+    //Adapter从模型层获取数据，然后提供给RecyclerView显示。
     private RecordAdapter mAdapter;
     private boolean mSubtitleVisible;
 
@@ -39,6 +45,7 @@ public class RecordListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_record_list, container, false);
 
+        //LinearLayoutManager在屏幕上以竖直方式摆放列表项以及定义屏幕滚动行为。
         mRecordRecyclerView = (RecyclerView) view
                 .findViewById(R.id.record_recycler_view);
         mRecordRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -52,6 +59,9 @@ public class RecordListFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 从被暂停并停止到恢复运行后，调用onResume，触发updateUI刷新列表显示项
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -110,6 +120,9 @@ public class RecordListFragment extends Fragment {
         activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
+    /**
+     * 将Adapter与RecyclerView关联起来
+     */
     private void updateUI() {
         RecordLab recordLab = RecordLab.get(getActivity());
         List<Record> records = recordLab.getRecords();
@@ -125,6 +138,9 @@ public class RecordListFragment extends Fragment {
         updateSubtitle();
     }
 
+    /**
+     * Adapter创建ViewHolder，ViewHolder引用着ItemView
+     */
     private class RecordHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
@@ -143,6 +159,9 @@ public class RecordListFragment extends Fragment {
             mSolvedImageView = (ImageView) itemView.findViewById(R.id.record_solved);
         }
 
+        /**
+         * 取到一个Record后，Holder就会刷新显示三个视图
+         */
         public void bind(Record record) {
             mRecord = record;
             mTitleTextView.setText(mRecord.getTitle());

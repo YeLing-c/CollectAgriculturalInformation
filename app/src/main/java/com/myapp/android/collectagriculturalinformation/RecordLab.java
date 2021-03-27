@@ -1,5 +1,7 @@
 package com.myapp.android.collectagriculturalinformation;
-
+/**
+ * Description 数据集中存储池，存储Record对象
+ */
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,6 +24,9 @@ public class RecordLab {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
+    /**
+     * 调用get方法创建RecordLab对象
+     */
     public static RecordLab get(Context context) {
         if (sRecordLab == null) {
             sRecordLab = new RecordLab(context);

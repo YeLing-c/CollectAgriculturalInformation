@@ -1,5 +1,7 @@
 package com.myapp.android.collectagriculturalinformation;
-
+/**
+ * Description 向用户展示record明细界面
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -53,7 +55,11 @@ public class RecordFragment extends Fragment {
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
-
+    /**
+     * 完成fragment实例及Bundle对象的创建
+     * 每个fragment实例都可以附带一个Bundle对象。
+     * 该bundle包含键值对，一个键值对即一个argument。
+     */
     public static RecordFragment newInstance(UUID recordId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_RECORD_ID, recordId);
@@ -66,16 +72,21 @@ public class RecordFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //从fragment的argument中获取ID
         UUID recordId = (UUID) getArguments().getSerializable(ARG_RECORD_ID);
         mRecord = RecordLab.get(getActivity()).getRecord(recordId);
         mPhotoFile = RecordLab.get(getActivity()).getPhotoFile(mRecord);
     }
 
+    /**
+     * 实例化fragment视图的布局，将实例化的View返回给托管activity。
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_record, container, false);
 
+        //标题
         mTitleField = (EditText) v.findViewById(R.id.record_title);
         mTitleField.setText(mRecord.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
@@ -95,6 +106,7 @@ public class RecordFragment extends Fragment {
             }
         });
 
+        //日期
         mDateButton = (Button) v.findViewById(R.id.record_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +120,7 @@ public class RecordFragment extends Fragment {
             }
         });
 
+        //是否解决
         mSolvedCheckbox = (CheckBox) v.findViewById(R.id.record_solved);
         mSolvedCheckbox.setChecked(mRecord.isSolved());
         mSolvedCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -118,6 +131,7 @@ public class RecordFragment extends Fragment {
             }
         });
 
+        //发送记录
         mReportButton = (Button) v.findViewById(R.id.record_report);
         mReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -131,6 +145,7 @@ public class RecordFragment extends Fragment {
             }
         });
 
+        //选择联系人
         final Intent pickContact = new Intent(Intent.ACTION_PICK,
                 ContactsContract.Contacts.CONTENT_URI);
         mContactsButton = (Button) v.findViewById(R.id.record_contacts);
@@ -149,6 +164,7 @@ public class RecordFragment extends Fragment {
             mContactsButton.setEnabled(false);
         }
 
+        //照相
         mPhotoButton = (ImageButton) v.findViewById(R.id.record_camera);
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         boolean canTakePhoto = mPhotoFile != null &&

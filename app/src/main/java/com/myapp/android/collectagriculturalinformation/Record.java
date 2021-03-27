@@ -1,18 +1,25 @@
 package com.myapp.android.collectagriculturalinformation;
-
+/**
+ * Description 模型层Record类
+ */
 import java.util.Date;
 import java.util.UUID;
 
 public class Record {
 
-    //测试
+    //标识ID
     private UUID mId;
+    //标题
     private String mTitle;
+    //日期
     private Date mDate;
+    //是否解决
     private boolean mSolved;
+    //联系人
     private String mContacts;
 
     public Record() {
+        //产生随机唯一ID值
         this(UUID.randomUUID());
     }
 

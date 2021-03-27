@@ -1,5 +1,9 @@
 package com.myapp.android.collectagriculturalinformation;
-
+/**
+ * Description 从activity_fragment布局里实例化activity视图。
+ * 然后在容器中查找FragmentManager里的fragment。
+ * 如果找不到就新建fragment并将其添加到容器中。
+ */
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;

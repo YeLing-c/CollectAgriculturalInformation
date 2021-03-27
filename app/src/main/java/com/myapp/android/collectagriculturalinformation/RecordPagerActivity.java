@@ -1,5 +1,8 @@
 package com.myapp.android.collectagriculturalinformation;
-
+/**
+ * Description 创建并管理ViewPager以及托管DatePickerFragment
+ * 为UI添加ViewPager后，用户可左右滑动屏幕，切换查看不同列表项的明细页面
+ */
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +44,9 @@ public class RecordPagerActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
+            /**
+             * 获取并显示Record数组中指定位置的Record
+             */
             @Override
             public Fragment getItem(int position) {
                 Record record = mRecords.get(position);

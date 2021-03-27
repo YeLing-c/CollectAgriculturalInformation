@@ -1,5 +1,7 @@
 package com.myapp.android.collectagriculturalinformation;
-
+/**
+ * Description 创建并配置显示日期对话框
+ */
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
