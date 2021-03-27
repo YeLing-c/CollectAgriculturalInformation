@@ -134,6 +134,7 @@ public class RecordFragment extends Fragment {
         });
 
         //发送记录
+        //发送一段文本消息，隐式intent操作是ACTION_SEND，指定数据类型为text/plain
         mReportButton = (Button) v.findViewById(R.id.record_report);
         mReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -148,6 +149,7 @@ public class RecordFragment extends Fragment {
         });
 
         //选择联系人
+        //创建隐式intent，操作为ACTION_PICK，联系人数据获取位置为ContactsContract.Contacts.CONTENT_URI
         final Intent pickContact = new Intent(Intent.ACTION_PICK,
                 ContactsContract.Contacts.CONTENT_URI);
         mContactsButton = (Button) v.findViewById(R.id.record_contacts);
@@ -159,7 +161,7 @@ public class RecordFragment extends Fragment {
         if (mRecord.getContacts() != null) {
             mContactsButton.setText(mRecord.getContacts());
         }
-
+        //检查是否存在联系人应用
         PackageManager packageManager = getActivity().getPackageManager();
         if (packageManager.resolveActivity(pickContact,
                 PackageManager.MATCH_DEFAULT_ONLY) == null) {
@@ -200,6 +202,9 @@ public class RecordFragment extends Fragment {
         return v;
     }
 
+    /**
+     * RecordFragment中修改完Record实例后，刷新RecordLab中的Record数据
+     */
     @Override
     public void onPause() {
         super.onPause();
@@ -221,22 +226,19 @@ public class RecordFragment extends Fragment {
             updateDate();
         } else if (requestCode == REQUEST_CONTACT && data != null) {
             Uri contactUri = data.getData();
-            // Specify which fields you want your query to return
-            // values for.
+            // 返回查询的联系人姓名字段
             String[] queryFields = new String[]{
                     ContactsContract.Contacts.DISPLAY_NAME
             };
-            // Perform your query - the contactUri is like a "where"
-            // clause here
+            // 执行查询操作，contactUri类似"where"语句
             Cursor c = getActivity().getContentResolver()
                     .query(contactUri, queryFields, null, null, null);
             try {
-                // Double-check that you actually got results
+                // 检查是否得到结果
                 if (c.getCount() == 0) {
                     return;
                 }
-                // Pull out the first column of the first row of data -
-                // that is your contacts's name.
+                // 拉出第一行数据的第一列，即联系人姓名
                 c.moveToFirst();
                 String contacts = c.getString(0);
                 mRecord.setContacts(contacts);
@@ -260,6 +262,9 @@ public class RecordFragment extends Fragment {
         mDateButton.setText(mRecord.getDate().toString());
     }
 
+    /**
+     * 创建四段字符串信息，并返回拼接完整的消息，作为要发送的report
+     */
     private String getRecordReport() {
         String solvedString = null;
         if (mRecord.isSolved()) {

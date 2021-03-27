@@ -1,7 +1,6 @@
 package com.myapp.android.collectagriculturalinformation;
 /**
  * Description 向用户展示record列表
- *
  */
 import android.content.Intent;
 import android.os.Bundle;

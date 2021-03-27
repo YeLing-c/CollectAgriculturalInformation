@@ -35,6 +35,9 @@ public class RecordLab {
         return sRecordLab;
     }
 
+    /**
+     * 创建数据库
+     */
     private RecordLab(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new RecordBaseHelper(mContext)
@@ -42,11 +45,17 @@ public class RecordLab {
 
     }
 
+    /**
+     * 向数据库写入数据
+     */
     public void addRecord(Record c) {
         ContentValues values = getContentValues(c);
         mDatabase.insert(RecordTable.NAME, null, values);
     }
 
+    /**
+     * 遍历查询出所有的Record，返回Record数组对象
+     */
     public List<Record> getRecords() {
         List<Record> records = new ArrayList<>();
         RecordCursorWrapper cursor = queryRecords(null, null);
@@ -62,6 +71,9 @@ public class RecordLab {
         return records;
     }
 
+    /**
+     * 取出首条记录
+     */
     public Record getRecord(UUID id) {
         RecordCursorWrapper cursor = queryRecords(
                 RecordTable.Cols.UUID + " = ?",
@@ -78,11 +90,17 @@ public class RecordLab {
         }
     }
 
+    /**
+     * 返回指向某个具体位置的File对象
+     */
     public File getPhotoFile(Record record) {
         File fileDir = mContext.getFilesDir();
         return new File(fileDir, record.getPhotoFilename());
     }
 
+    /**
+     * 更新数据库记录
+     */
     public void updateRecord(Record record) {
         String uuidString = record.getId().toString();
         ContentValues values = getContentValues(record);
@@ -91,6 +109,9 @@ public class RecordLab {
                 new String[]{uuidString});
     }
 
+    /**
+     * 调用数据库的query方法查询RecordTable中的数据
+     */
     private RecordCursorWrapper queryRecords(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 RecordTable.NAME,
@@ -104,6 +125,11 @@ public class RecordLab {
         return new RecordCursorWrapper(cursor);
     }
 
+    /**
+     * 创建ContentValues实例，将Record记录转换为ContentValues
+     * ContentValues是负责处理数据库写入和更新操作的辅助类。
+     * 它是一个键值存储类，类似前面的Bundle。键是数据表字段。
+     */
     private static ContentValues getContentValues(Record record) {
         ContentValues values = new ContentValues();
         values.put(UUID, record.getId().toString());

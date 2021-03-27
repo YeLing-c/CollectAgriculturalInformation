@@ -1,7 +1,6 @@
 package com.myapp.android.collectagriculturalinformation;
 /**
- * Description
- *
+ * Description 缩放位图照片
  */
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -17,7 +16,7 @@ public class PictureUtils {
     }
 
     public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight) {
-        // Read in the dimensions of the image on disk
+        // 读取磁盘上图像的尺寸
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(path, options);
@@ -25,7 +24,7 @@ public class PictureUtils {
         float srcWidth = options.outWidth;
         float srcHeight = options.outHeight;
 
-        // Figure out how much to scale down by
+        // 计算出要缩小多少
         int inSampleSize = 1;
         if (srcHeight > destHeight || srcWidth > destWidth) {
             float heightScale = srcHeight / destHeight;
@@ -38,7 +37,7 @@ public class PictureUtils {
         options = new BitmapFactory.Options();
         options.inSampleSize = inSampleSize;
 
-        // Read in and create final bitmap
+        // 创建最终的位图
         return BitmapFactory.decodeFile(path, options);
     }
 }

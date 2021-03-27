@@ -1,5 +1,8 @@
 package com.myapp.android.collectagriculturalinformation.database;
-
+/**
+ * Description Cursor可以封装数据表中的原始字段值
+ * 使用CursorWrapper封装Cursor对象，防止重复写代码
+ */
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import com.myapp.android.collectagriculturalinformation.database.RecordDbSchema.RecordTable;
