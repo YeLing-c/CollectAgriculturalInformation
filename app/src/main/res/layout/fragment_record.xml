@@ -70,6 +70,11 @@
         android:layout_height="wrap_content"
         android:text="@string/record_solved_label" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/record_location_hint"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
