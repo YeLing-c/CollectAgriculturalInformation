@@ -24,7 +24,8 @@ public class RecordBaseHelper extends SQLiteOpenHelper {
                 RecordTable.Cols.TITLE + ", " +
                 RecordTable.Cols.DATE + ", " +
                 RecordTable.Cols.SOLVED + ", " +
-                RecordTable.Cols.CONTACTS +
+                RecordTable.Cols.CONTACTS + ", " +
+                RecordTable.Cols.LOCATION +
                 ")"
         );
     }

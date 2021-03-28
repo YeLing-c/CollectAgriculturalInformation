@@ -2,6 +2,7 @@ package com.myapp.android.collectagriculturalinformation;
 /**
  * Description 向用户展示record明细界面
  */
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +26,20 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.MyLocationData;
 
 import java.io.File;
 import java.util.Date;
@@ -55,6 +67,10 @@ public class RecordFragment extends Fragment {
     private Button mContactsButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
+    private TextView mLocation;
+    private Button mLocationButton;
+    //定位客户端
+    private LocationClient mLocationClient;
 
     /**
      * 完成fragment实例及Bundle对象的创建
@@ -199,7 +215,49 @@ public class RecordFragment extends Fragment {
         mPhotoView = (ImageView) v.findViewById(R.id.record_photo);
         updatePhotoView();
 
+        //定位
+        mLocation = (TextView) v.findViewById(R.id.record_location);
+        mLocationButton = (Button) v.findViewById(R.id.record_location_button);
+        if(mRecord.getLocation()!=null){
+            mLocationButton.setEnabled(false);
+            mLocation.setText(mRecord.getLocation());
+
+        }else{
+            mLocationButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    //定位初始化
+                    mLocationClient = new LocationClient(getActivity().getApplicationContext());
+                    //注册LocationListener监听器
+                    mLocationClient.registerLocationListener(new MyLocationListener());
+                    SDKInitializer.initialize(getActivity().getApplicationContext());
+                    //通过LocationClientOption设置LocationClient相关参数
+                    LocationClientOption option = new LocationClientOption();
+                    //设置扫描时间间隔
+                    option.setScanSpan(1000);
+                    //设置定位模式，三选一
+                    option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+                    //设置需要地址信息
+                    option.setIsNeedAddress(true);
+                    //保存定位参数
+                    mLocationClient.setLocOption(option);
+                    //开启地图定位图层
+                    mLocationClient.start();
+
+                }
+            });
+        }
+
         return v;
+    }
+
+    //内部类，百度位置监听器
+    private class MyLocationListener  implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation bdLocation) {
+            mLocation.setText(bdLocation.getAddrStr());
+            mRecord.setLocation(mLocation.getText().toString());
+        }
     }
 
     /**
@@ -211,6 +269,7 @@ public class RecordFragment extends Fragment {
 
         RecordLab.get(getActivity())
                 .updateRecord(mRecord);
+
     }
 
     @Override

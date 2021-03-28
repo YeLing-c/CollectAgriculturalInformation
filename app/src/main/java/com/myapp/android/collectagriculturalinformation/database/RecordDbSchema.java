@@ -14,6 +14,7 @@ public class RecordDbSchema {
             public static final String DATE = "date";
             public static final String SOLVED = "solved";
             public static final String CONTACTS = "contacts";
+            public static final String LOCATION = "location";
         }
     }
 

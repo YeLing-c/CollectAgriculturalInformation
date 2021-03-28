@@ -137,6 +137,7 @@ public class RecordLab {
         values.put(DATE, record.getDate().getTime());
         values.put(SOLVED, record.isSolved() ? 1 : 0);
         values.put(CONTACTS, record.getContacts());
+        values.put(LOCATION, record.getLocation());
         return values;
     }
 

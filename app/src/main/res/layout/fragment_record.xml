@@ -71,11 +71,14 @@
         android:text="@string/record_solved_label" />
 
     <TextView
+        android:id="@+id/record_location"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
+        android:gravity="center"
         android:hint="@string/record_location_hint"/>
 
     <Button
+        android:id="@+id/record_location_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/record_location"/>

@@ -17,6 +17,8 @@ public class Record {
     private boolean mSolved;
     //联系人
     private String mContacts;
+    //定位
+    private String mLocation;
 
     public Record() {
         //产生随机唯一ID值
@@ -26,6 +28,14 @@ public class Record {
     public Record(UUID id) {
         mId = id;
         mDate = new Date();
+    }
+
+    public String getLocation() {
+        return mLocation;
+    }
+
+    public void setLocation(String location) {
+        mLocation = location;
     }
 
     public UUID getId() {
