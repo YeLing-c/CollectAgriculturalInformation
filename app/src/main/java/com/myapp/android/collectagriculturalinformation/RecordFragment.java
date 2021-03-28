@@ -322,7 +322,7 @@ public class RecordFragment extends Fragment {
     }
 
     /**
-     * 创建四段字符串信息，并返回拼接完整的消息，作为要发送的report
+     * 创建五段字符串信息，并返回拼接完整的消息，作为要发送的report
      */
     private String getRecordReport() {
         String solvedString = null;
@@ -334,13 +334,14 @@ public class RecordFragment extends Fragment {
         String dateFormat = "EEE, MMM dd";
         String dateString = DateFormat.format(dateFormat, mRecord.getDate()).toString();
         String contacts = mRecord.getContacts();
+        String location = mRecord.getLocation();
         if (contacts == null) {
             contacts = getString(R.string.record_report_no_contacts);
         } else {
             contacts = getString(R.string.record_report_contacts, contacts);
         }
         String report = getString(R.string.record_report,
-                mRecord.getTitle(), dateString, solvedString, contacts);
+                mRecord.getTitle(), dateString, solvedString, contacts, location);
         return report;
     }
 

@@ -15,7 +15,7 @@
     <string name="record_contacts_text">Choose Contacts</string>
     <string name="record_report_text">Send Record Report</string>
     <string name="record_report">%1$s!
-    The record was discovered on %2$s. %3$s, and %4$s
+    The record was discovered on %2$s. %3$s, %4$s location: %5$s.
   </string>
     <string name="record_report_solved">The case is solved</string>
     <string name="record_report_unsolved">The case is not solved</string>

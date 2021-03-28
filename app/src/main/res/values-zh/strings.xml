@@ -13,7 +13,7 @@
     <string name="record_contacts_text">选择联系人</string>
     <string name="record_report_text">共享</string>
     <string name="record_report">%1$s!
-        记录于 %2$s. %3$s, and %4$s
+        记录于 %2$s. %3$s, %4$s 定位： %5$s
     </string>
     <string name="record_report_solved">问题已解决</string>
     <string name="record_report_unsolved">问题未解决</string>
