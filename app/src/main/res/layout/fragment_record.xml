@@ -95,4 +95,10 @@
         android:layout_height="wrap_content"
         android:text="@string/record_report_text" />
 
+    <Button
+        android:id="@+id/record_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_record" />
+
 </LinearLayout>

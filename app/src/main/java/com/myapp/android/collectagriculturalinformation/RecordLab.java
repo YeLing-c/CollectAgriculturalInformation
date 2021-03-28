@@ -54,6 +54,13 @@ public class RecordLab {
     }
 
     /**
+     * 删除某条记录
+     */
+    public void deleteRecord(Record c) {
+        mDatabase.delete(RecordTable.NAME, "uuid=?", new String[]{c.getId().toString()});
+    }
+
+    /**
      * 遍历查询出所有的Record，返回Record数组对象
      */
     public List<Record> getRecords() {

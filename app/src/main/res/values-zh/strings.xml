@@ -23,4 +23,5 @@
     <string name="send_report">发送报告</string>
     <string name="record_location">定位</string>
     <string name="record_location_hint">点击按钮显示定位</string>
+    <string name="delete_record">删除</string>
 </resources>

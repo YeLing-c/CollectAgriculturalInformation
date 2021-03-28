@@ -71,6 +71,7 @@ public class RecordFragment extends Fragment {
     private Button mLocationButton;
     //定位客户端
     private LocationClient mLocationClient;
+    private Button mDeleteButton;
 
     /**
      * 完成fragment实例及Bundle对象的创建
@@ -247,6 +248,15 @@ public class RecordFragment extends Fragment {
                 }
             });
         }
+
+        //删除
+        mDeleteButton = (Button) v.findViewById(R.id.record_delete);
+        mDeleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                RecordLab.get(getActivity()).deleteRecord(mRecord);
+            }
+        });
 
         return v;
     }
